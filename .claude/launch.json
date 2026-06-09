@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "boda-carolina-y-alfonso",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3483", "C:\\Users\\aleja\\boda-carolina-y-alfonso"],
+      "port": 3483
+    }
+  ]
+}
