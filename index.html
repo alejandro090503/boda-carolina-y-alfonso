@@ -537,7 +537,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 <div id="toast"></div>
 
 <!-- AUDIO — Supabase, nunca en /public -->
-<audio id="bgMusic" loop preload="none">
+<audio id="bgMusic" loop preload="metadata">
   <source src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/audio/boda-carolina-y-alfonso/cancion.mp3" type="audio/mpeg">
 </audio>
 
@@ -1110,11 +1110,12 @@ function openEnvelope() {
   if (envelopeOpened) return;
   envelopeOpened = true;
 
-  /* Desbloquear audio en el mismo gesto de click ──────── */
+  /* Arrancar música silenciosa en el gesto de click ──── */
+  /* (volumen 0 durante el video; dismissLoader sube a 1) */
   const bgm = document.getElementById('bgMusic');
   if (bgm) {
     bgm.volume = 0;
-    bgm.play().then(() => { bgm.pause(); bgm.currentTime = 0; bgm.volume = 1; }).catch(() => {});
+    bgm.play().catch(() => {});   // sin pause → evita race con dismissLoader
   }
 
   const content = document.querySelector('.ld-content');
@@ -1154,9 +1155,14 @@ function dismissLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
   const bgm = document.getElementById('bgMusic');
-  if (bgm) bgm.play().then(() => {
-    document.getElementById('music-btn').classList.add('is-playing');
-  }).catch(() => {});
+  if (bgm) {
+    bgm.volume = 1;               // sube volumen (ya estaba playing en silencio)
+    if (bgm.paused) {             // fallback: si por alguna razón estaba pausado
+      bgm.play().catch(() => {});
+    }
+    const btn = document.getElementById('music-btn');
+    if (btn) btn.classList.add('is-playing');
+  }
   gsap.to(loader, {
     opacity: 0, duration: .6, ease: 'power2.out',
     onComplete() {
