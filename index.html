@@ -190,40 +190,63 @@ footer{
 #hero{
   min-height:100svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  position:relative;overflow:hidden;padding:80px 28px 100px;
-  background:#faf2e2;
+  position:relative;overflow:hidden;padding:48px 28px 88px;
+  background:#1c0d0d;
 }
-.h-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
+.h-bg{position:absolute;top:-20%;left:0;right:0;bottom:-20%;z-index:0;will-change:transform;}
 .h-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(1.05);}
 .h-ov{
   position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%, rgba(252,245,228,.55) 0%, rgba(252,245,228,.20) 35%, transparent 65%);
+  background:linear-gradient(to bottom,
+    rgba(255,255,255,.22) 0%,
+    rgba(255,255,255,.62) 28%,
+    rgba(255,255,255,.72) 60%,
+    rgba(255,255,255,.98) 100%);
 }
-.h-photo-frame{position:absolute;top:26px;left:26px;right:26px;bottom:26px;border:.5px solid rgba(122,72,38,.40);z-index:2;pointer-events:none;}
-.h-photo-frame::before{content:'';position:absolute;inset:6px;border:.5px solid rgba(181,117,78,.28);}
-.h-photo-frame::after{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:8px;height:8px;background:linear-gradient(135deg,var(--gold-lt),var(--gold),var(--gold-deep));box-shadow:0 0 6px rgba(181,117,78,.45);}
-.h-content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;animation:heroFadeUp 1.6s var(--smooth) .2s both;width:100%;max-width:340px;}
-@keyframes heroFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.h-eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:8px;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:18px;opacity:0;animation:heroEl 1s ease .5s forwards;}
-.h-eyebrow::before,.h-eyebrow::after{content:'';display:inline-block;vertical-align:middle;width:24px;height:1px;background:var(--gold);margin:0 14px;opacity:.7;}
-.h-names{font-family:'Italianno','Great Vibes',cursive;font-size:clamp(82px,22vw,124px);line-height:.82;color:var(--cream);text-shadow:0 1px 0 rgba(255,255,255,.55),0 2px 18px rgba(252,245,228,.7);white-space:nowrap;opacity:0;animation:heroEl 1.1s ease .75s forwards;}
-.h-amp{font-family:'Pinyon Script',cursive;font-size:clamp(48px,13vw,76px);color:var(--gold);display:block;line-height:.85;margin:-10px 0 -12px;text-shadow:0 1px 0 rgba(255,255,255,.7);opacity:0;animation:heroEl 1s ease .95s forwards;}
-.h-names:nth-of-type(2){animation-delay:1.15s}
-@keyframes heroEl{to{opacity:1}}
-.h-meta{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;animation:heroEl 1s ease 1.4s forwards;}
-.h-date-block{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:2px;}
-.h-date-day{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:62px;line-height:1;color:var(--cream);text-shadow:0 1px 0 rgba(255,255,255,.55);}
-.h-date-mid{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 2px;}
-.h-date-mid-line{width:48px;height:1px;background:linear-gradient(to right,transparent,var(--gold) 50%,transparent);}
-.h-date-month{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:13px;letter-spacing:7px;text-transform:uppercase;color:var(--gold-deep);}
-.h-date-year{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:62px;line-height:1;color:var(--cream);text-shadow:0 1px 0 rgba(255,255,255,.55);}
-.h-city{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-deep);margin-top:6px;}
-.h-city::before{content:'';display:inline-block;vertical-align:middle;width:14px;height:1px;background:var(--gold);margin-right:10px;opacity:.7;}
-.h-city::after{content:'';display:inline-block;vertical-align:middle;width:14px;height:1px;background:var(--gold);margin-left:10px;opacity:.7;}
-.h-scroll-hint{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--gold-deep);}
-.h-scroll-hint span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.85;}
-.h-scroll-hint-line{width:1px;height:30px;background:linear-gradient(to bottom,var(--gold),transparent);transform-origin:top;animation:scrollLine 2s ease-in-out infinite;}
-@keyframes scrollLine{0%{transform:scaleY(0);opacity:1}80%{transform:scaleY(1);opacity:.8}100%{transform:scaleY(1);opacity:0}}
+.h-ov::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.55) 0%,transparent 68%);}
+/* gold frame with ✦ corners */
+.h-frame{position:absolute;inset:22px;border:1px solid rgba(181,117,78,.38);z-index:2;pointer-events:none;}
+.h-frame::before{content:'✦';position:absolute;top:-8px;left:-8px;width:16px;height:16px;font-size:10px;color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--ink);}
+.h-frame::after{content:'✦';position:absolute;bottom:-8px;right:-8px;width:16px;height:16px;font-size:10px;color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--ink);}
+/* rings */
+.h-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);z-index:2;pointer-events:none;width:340px;height:340px;}
+.h-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);}
+.h-ring-1{width:260px;height:260px;border:1px solid rgba(181,117,78,.22);animation:hRingBreathe 7s ease-in-out infinite;}
+.h-ring-2{width:310px;height:310px;border:1px solid rgba(181,117,78,.14);animation:hRingBreathe 9s ease-in-out 1s infinite reverse;}
+.h-ring-3{width:200px;height:200px;border:.5px solid rgba(139,44,44,.18);animation:hRingRotate 60s linear infinite;}
+@keyframes hRingBreathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
+@keyframes hRingRotate{to{transform:translate(-50%,-50%) rotate(360deg)}}
+/* wave SVG top/bottom */
+.h-wave{position:absolute;left:0;right:0;z-index:2;pointer-events:none;overflow:hidden;height:38px;}
+.h-wave-top{top:0}
+.h-wave-bot{bottom:0;transform:scaleY(-1)}
+.h-wave svg{display:block;width:200%;height:100%;animation:hWaveSlide 28s linear infinite;}
+@keyframes hWaveSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* particles */
+.h-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;}
+.meteor{position:absolute;pointer-events:none;opacity:0;animation:meteorFall linear forwards;}
+@keyframes meteorFall{0%{opacity:0;transform:translateY(-12px) scale(.4)}15%{opacity:1}85%{opacity:.7}100%{opacity:0;transform:translateY(var(--fall)) scale(.9)}}
+/* main content */
+.h-cnt{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.h-we{font-size:14px;letter-spacing:5px;text-transform:uppercase;color:var(--peach);font-family:'Cormorant Garamond',serif;font-weight:500;margin-bottom:22px;}
+/* name wrap with wind lines */
+.h-name-wrap{display:flex;align-items:center;gap:14px;}
+.h-name-wind-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(181,117,78,.55),transparent);max-width:64px;animation:hWindLinePulse 3s ease-in-out infinite;}
+@keyframes hWindLinePulse{0%,100%{opacity:.3;transform:scaleX(.7)}50%{opacity:1;transform:scaleX(1)}}
+.h-clip{overflow:hidden;}
+.h-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(44px,14vw,64px);font-weight:500;color:var(--cream);line-height:1.05;display:block;}
+/* amp */
+.h-amp-clip{overflow:hidden;margin:2px 0;}
+.h-amp{font-family:'Pinyon Script',cursive;font-size:clamp(52px,16vw,72px);color:var(--gold);line-height:.9;display:block;}
+/* date / city */
+.h-date-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:10px;}
+.h-date{font-size:18px;letter-spacing:4px;color:var(--peach-accent);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;}
+.h-city{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);font-family:'Cormorant Garamond',serif;opacity:.72;}
+/* scroll hint */
+.h-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--peach);}
+.h-scroll span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.8;}
+.h-scroll-line{width:1px;height:30px;background:linear-gradient(to bottom,var(--gold),transparent);transform-origin:top;animation:hScrollLine 2s ease-in-out infinite;}
+@keyframes hScrollLine{0%{transform:scaleY(0);opacity:1}80%{transform:scaleY(1);opacity:.8}100%{transform:scaleY(1);opacity:0}}
 
 /* ── VERSÍCULO ────────────────────────────────────────── */
 #versiculo{background:var(--ink2);padding:56px 32px;text-align:center;border-top:1px solid rgba(139,44,44,.09);border-bottom:1px solid rgba(139,44,44,.09);}
@@ -498,36 +521,57 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
          alt="Carolina y Alfonso" loading="eager" fetchpriority="high" id="heroPic">
   </div>
   <div class="h-ov"></div>
-  <div class="h-photo-frame"></div>
+  <div class="h-frame"></div>
 
-  <div class="h-content">
-    <p class="h-eyebrow">Nuestra Boda</p>
+  <div class="h-wave h-wave-top" aria-hidden="true">
+    <svg viewBox="0 0 800 38" preserveAspectRatio="none">
+      <path d="M0,20 Q100,4 200,20 T400,20 T600,20 T800,20" fill="none" stroke="rgba(181,117,78,.22)" stroke-width="1"/>
+      <path d="M0,28 Q100,12 200,28 T400,28 T600,28 T800,28" fill="none" stroke="rgba(139,44,44,.14)" stroke-width=".7"/>
+    </svg>
+  </div>
+  <div class="h-wave h-wave-bot" aria-hidden="true">
+    <svg viewBox="0 0 800 38" preserveAspectRatio="none">
+      <path d="M0,20 Q100,4 200,20 T400,20 T600,20 T800,20" fill="none" stroke="rgba(181,117,78,.22)" stroke-width="1"/>
+    </svg>
+  </div>
 
-    <h1 class="h-names" id="hN1">Carolina</h1>
-    <span class="h-amp" id="hAmp">&amp;</span>
-    <h1 class="h-names" id="hN2">Alfonso</h1>
+  <div class="h-rings" aria-hidden="true">
+    <div class="h-ring h-ring-1"></div>
+    <div class="h-ring h-ring-2"></div>
+    <div class="h-ring h-ring-3"></div>
+  </div>
 
-    <div class="h-meta">
-      <div class="ornament-h" aria-hidden="true">
-        <span class="ornament-line ornament-line-sm"></span>
-        <span class="ornament-diamond"></span>
-        <span class="ornament-line ornament-line-sm"></span>
-      </div>
-      <div class="h-date-block">
-        <span class="h-date-day">31</span>
-        <span class="h-date-mid">
-          <span class="h-date-mid-line"></span>
-          <span class="h-date-month">Octubre</span>
-          <span class="h-date-mid-line"></span>
-        </span>
-        <span class="h-date-year">26</span>
-      </div>
+  <div class="h-particles" id="hPart" aria-hidden="true"></div>
+
+  <div class="h-cnt" id="hCnt">
+    <p class="h-we">Nos casamos</p>
+
+    <div class="h-name-wrap">
+      <span class="h-name-wind-line"></span>
+      <div class="h-clip"><span class="h-name" id="hN1">Carolina</span></div>
+      <span class="h-name-wind-line"></span>
+    </div>
+
+    <div class="h-amp-clip">
+      <span class="h-amp" id="hAmp">&amp;</span>
+    </div>
+
+    <div class="h-name-wrap">
+      <span class="h-name-wind-line"></span>
+      <div class="h-clip"><span class="h-name" id="hN2">Alfonso</span></div>
+      <span class="h-name-wind-line"></span>
+    </div>
+
+    <div class="gline" style="margin-top:32px" id="hLine"></div>
+
+    <div class="h-date-wrap" id="hDate">
+      <p class="h-date">31 · Octubre · 2026</p>
       <p class="h-city">Chocholá · Yucatán</p>
     </div>
   </div>
 
-  <div class="h-scroll-hint" id="hScroll" aria-hidden="true">
-    <div class="h-scroll-hint-line"></div>
+  <div class="h-scroll" id="hScroll" aria-hidden="true">
+    <div class="h-scroll-line"></div>
     <span>Desliza</span>
   </div>
 </section>
@@ -1077,10 +1121,19 @@ window.addEventListener('scroll', () => {
 
 /* ── HERO ANIM ───────────────────────────────────────── */
 function heroAnim() {
-  gsap.set('#hScroll', { opacity: 0 });
-  gsap.to('#hScroll', { opacity: 1, duration: .6, delay: 1.6, ease: 'power2.out' });
+  gsap.set(['#hLine','#hDate','#hScroll'], { opacity: 0 });
+  gsap.set(['#hN1','#hN2','#hAmp'], { yPercent: 110 });
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl
+    .to('#hN1',   { yPercent: 0, duration: 1 },   .15)
+    .to('#hAmp',  { yPercent: 0, duration: .8 },  .4)
+    .to('#hN2',   { yPercent: 0, duration: 1 },   .55)
+    .to('#hLine', { opacity: .7, duration: .6 },  .9)
+    .to('#hDate', { opacity: 1, duration: .7 },   1.05)
+    .to('#hScroll',{ opacity: 1, duration: .5 },  1.5);
   if (document.getElementById('heroBg')) {
-    gsap.to('#heroBg', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('#heroBg', { yPercent: 22, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
   }
 }
 
@@ -1088,6 +1141,42 @@ function heroAnim() {
 function spawnParticles() {
   const c = document.getElementById('hPart');
   if (!c) return;
+  const COLORS = ['var(--peach)','var(--gold)','var(--peach-lt)','rgba(181,117,78,.7)'];
+  const MAX = 28;
+  let alive = 0;
+
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function spawn(){
+    if (alive >= MAX) return;
+    alive++;
+    const el = document.createElement('div');
+    el.className = 'meteor';
+    const size = rand(3,7);
+    const isDiamond = Math.random() > .45;
+    const col = COLORS[Math.floor(Math.random()*COLORS.length)];
+    const fall = rand(120,320);
+    const dur  = rand(2.4,5.2);
+    const delay = rand(0,1.2);
+    el.style.cssText = [
+      `width:${size}px`,`height:${size}px`,
+      `left:${rand(4,96)}%`,`top:${rand(5,75)}%`,
+      `background:${col}`,
+      `border-radius:${isDiamond?'0':'50%'}`,
+      `transform:${isDiamond?'rotate(45deg)':'none'}`,
+      `--fall:${fall}px`,
+      `animation-duration:${dur}s`,
+      `animation-delay:${delay}s`,
+      `box-shadow:0 0 ${size+2}px ${col}`
+    ].join(';');
+    el.addEventListener('animationend', () => { el.remove(); alive--; });
+    c.appendChild(el);
+  }
+
+  // initial burst
+  for(let i=0;i<16;i++) setTimeout(spawn, i*120);
+  // continuous drip
+  setInterval(spawn, 380);
 }
 
 /* ── COUNTDOWN ───────────────────────────────────────── */
