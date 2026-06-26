@@ -189,65 +189,45 @@ footer{
 /* ── HERO ─────────────────────────────────────────────── */
 #hero{
   min-height:100svh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  position:relative;overflow:hidden;padding:48px 28px 88px;
-  background:#1c0d0d;
+  align-items:center;justify-content:flex-end;
+  position:relative;overflow:hidden;padding:0 28px 60px;
+  background:#0a0604;
 }
-.h-bg{position:absolute;top:-20%;left:0;right:0;bottom:-20%;z-index:0;will-change:transform;}
-.h-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(1.05);}
+.h-bg{position:absolute;top:-10%;left:0;right:0;bottom:-10%;z-index:0;will-change:transform;}
+.h-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(1.1) brightness(1.05);}
 .h-ov{
   position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(to bottom,
-    rgba(255,255,255,.10) 0%,
-    rgba(255,255,255,.55) 22%,
-    rgba(255,255,255,.82) 55%,
-    rgba(255,255,255,.98) 100%);
+    rgba(10,6,4,.10) 0%,
+    rgba(10,6,4,.05) 30%,
+    rgba(10,6,4,.25) 55%,
+    rgba(10,6,4,.75) 80%,
+    rgba(10,6,4,.92) 100%);
 }
-.h-ov::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 44%,rgba(255,255,255,.88) 0%,rgba(255,255,255,.55) 42%,transparent 72%);}
-/* halo suave detrás del bloque de texto */
-.h-cnt::before{content:'';position:absolute;inset:-32px -48px;border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;background:radial-gradient(ellipse at 50% 52%,rgba(255,255,255,.85) 0%,rgba(255,255,255,.60) 42%,transparent 75%);z-index:-1;pointer-events:none;}
-/* gold frame with ✦ corners */
-.h-frame{position:absolute;inset:22px;border:1px solid rgba(181,117,78,.38);z-index:2;pointer-events:none;}
-.h-frame::before{content:'✦';position:absolute;top:-8px;left:-8px;width:16px;height:16px;font-size:10px;color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--ink);}
-.h-frame::after{content:'✦';position:absolute;bottom:-8px;right:-8px;width:16px;height:16px;font-size:10px;color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--ink);}
-/* rings */
-.h-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);z-index:2;pointer-events:none;width:340px;height:340px;}
-.h-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);}
-.h-ring-1{width:260px;height:260px;border:1px solid rgba(181,117,78,.22);animation:hRingBreathe 7s ease-in-out infinite;}
-.h-ring-2{width:310px;height:310px;border:1px solid rgba(181,117,78,.14);animation:hRingBreathe 9s ease-in-out 1s infinite reverse;}
-.h-ring-3{width:200px;height:200px;border:.5px solid rgba(139,44,44,.18);animation:hRingRotate 60s linear infinite;}
-@keyframes hRingBreathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
-@keyframes hRingRotate{to{transform:translate(-50%,-50%) rotate(360deg)}}
-/* wave SVG top/bottom */
-.h-wave{position:absolute;left:0;right:0;z-index:2;pointer-events:none;overflow:hidden;height:38px;}
-.h-wave-top{top:0}
-.h-wave-bot{bottom:0;transform:scaleY(-1)}
-.h-wave svg{display:block;width:200%;height:100%;animation:hWaveSlide 28s linear infinite;}
-@keyframes hWaveSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-/* particles */
+.h-ov::after{display:none;}
+.h-cnt::before{display:none;}
+.h-frame{display:none;}
+.h-frame::before,.h-frame::after{display:none;}
+.h-rings{display:none;}
+.h-ring,.h-ring-1,.h-ring-2,.h-ring-3{display:none;}
+.h-wave{display:none;}
 .h-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;}
 .meteor{position:absolute;pointer-events:none;opacity:0;animation:meteorFall linear forwards;}
 @keyframes meteorFall{0%{opacity:0;transform:translateY(-12px) scale(.4)}15%{opacity:1}85%{opacity:.7}100%{opacity:0;transform:translateY(var(--fall)) scale(.9)}}
-/* main content */
 .h-cnt{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;text-align:center;}
-.h-we{font-size:14px;letter-spacing:5px;text-transform:uppercase;color:var(--peach);font-family:'Cormorant Garamond',serif;font-weight:500;margin-bottom:22px;}
-/* name wrap with wind lines */
-.h-name-wrap{display:flex;align-items:center;gap:14px;}
-.h-name-wind-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(181,117,78,.55),transparent);max-width:64px;animation:hWindLinePulse 3s ease-in-out infinite;}
-@keyframes hWindLinePulse{0%,100%{opacity:.3;transform:scaleX(.7)}50%{opacity:1;transform:scaleX(1)}}
+.h-we{display:none;}
+.h-name-wrap{display:flex;align-items:center;gap:0;}
+.h-name-wind-line{display:none;}
 .h-clip{overflow:hidden;}
-.h-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(44px,14vw,64px);font-weight:500;color:var(--cream);line-height:1.05;display:block;}
-/* amp */
-.h-amp-clip{overflow:hidden;margin:2px 0;}
-.h-amp{font-family:'Pinyon Script',cursive;font-size:clamp(52px,16vw,72px);color:var(--gold);line-height:.9;display:block;}
-/* date / city */
-.h-date-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:10px;}
-.h-date{font-size:18px;letter-spacing:4px;color:var(--peach-accent);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;}
-.h-city{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);font-family:'Cormorant Garamond',serif;opacity:.72;}
-/* scroll hint */
-.h-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--peach);}
+.h-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(52px,16vw,74px);font-weight:500;color:#fff;line-height:1.05;display:block;text-shadow:0 2px 30px rgba(0,0,0,.6),0 0 80px rgba(0,0,0,.3);}
+.h-amp-clip{overflow:hidden;margin:4px 0;}
+.h-amp{font-family:'Pinyon Script',cursive;font-size:clamp(56px,18vw,80px);color:var(--gold-lt);line-height:.9;display:block;text-shadow:0 2px 20px rgba(0,0,0,.5);}
+.h-date-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:16px;}
+.h-date{font-size:clamp(16px,4vw,20px);letter-spacing:5px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;text-shadow:0 1px 12px rgba(0,0,0,.7);}
+.h-city{font-size:clamp(12px,3vw,15px);letter-spacing:4px;text-transform:uppercase;color:var(--cream);font-family:'Cormorant Garamond',serif;opacity:.85;text-shadow:0 1px 12px rgba(0,0,0,.7);}
+.h-scroll{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.7);}
 .h-scroll span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.8;}
-.h-scroll-line{width:1px;height:30px;background:linear-gradient(to bottom,var(--gold),transparent);transform-origin:top;animation:hScrollLine 2s ease-in-out infinite;}
+.h-scroll-line{width:1px;height:30px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);transform-origin:top;animation:hScrollLine 2s ease-in-out infinite;}
 @keyframes hScrollLine{0%{transform:scaleY(0);opacity:1}80%{transform:scaleY(1);opacity:.8}100%{transform:scaleY(1);opacity:0}}
 
 /* ── VERSÍCULO ────────────────────────────────────────── */
@@ -509,6 +489,33 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 /* ── FLORAL BACKGROUNDS ──────────────────────────────── */
 .sec-floral{position:absolute;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:.50;}
 .sec-floral ~ *{position:relative;z-index:1;}
+
+/* ── RESPONSIVE TWEAKS ────────────────────────────────── */
+@media(max-width:380px){
+  .h-name{font-size:clamp(42px,14vw,52px);}
+  .h-amp{font-size:clamp(48px,15vw,60px);}
+  .loc-card{padding:36px 16px 28px;}
+  .dc-cols{flex-direction:column;}
+  .dc-col:first-child{border-right:none;border-bottom:1px solid rgba(201,152,90,.15);}
+  .fam-card{padding:22px 20px;}
+  .wheel-card{flex:0 0 170px;height:240px;}
+}
+@media(min-width:520px){
+  .loc-card{max-width:440px;margin-left:auto;margin-right:auto;}
+  .fam-card{max-width:400px;}
+  .gf-card{max-width:400px;margin-left:auto;margin-right:auto;}
+  .dc-cols{max-width:440px;margin-left:auto;margin-right:auto;}
+  .wheel-card{flex:0 0 240px;height:340px;}
+}
+@media(min-width:768px){
+  #hero{padding-bottom:80px;}
+  .h-name{font-size:clamp(64px,10vw,88px);}
+  .h-amp{font-size:clamp(72px,12vw,96px);}
+  .loc-card{max-width:520px;}
+  .cd-num{font-size:clamp(48px,8vw,68px);}
+  .vers-text{font-size:24px;max-width:460px;}
+  .wheel-card{flex:0 0 280px;height:400px;}
+}
 
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -1188,17 +1195,18 @@ window.addEventListener('scroll', () => {
 /* ── HERO ANIM ───────────────────────────────────────── */
 function heroAnim() {
   gsap.set(['#hLine','#hDate','#hScroll'], { opacity: 0 });
-  gsap.set(['#hN1','#hN2','#hAmp'], { yPercent: 110 });
+  gsap.set(['#hN1','#hN2','#hAmp'], { yPercent: 120, opacity: 0 });
+  gsap.set('.h-bg img', { scale: 1.15 });
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl
-    .to('#hN1',   { yPercent: 0, duration: 1 },   .15)
-    .to('#hAmp',  { yPercent: 0, duration: .8 },  .4)
-    .to('#hN2',   { yPercent: 0, duration: 1 },   .55)
-    .to('#hLine', { opacity: .7, duration: .6 },  .9)
-    .to('#hDate', { opacity: 1, duration: .7 },   1.05)
-    .to('#hScroll',{ opacity: 1, duration: .5 },  1.5);
+    .to('.h-bg img', { scale: 1, duration: 2.5, ease: 'power2.out' }, 0)
+    .to('#hN1',   { yPercent: 0, opacity: 1, duration: 1.2 },  .3)
+    .to('#hAmp',  { yPercent: 0, opacity: 1, duration: 1 },    .6)
+    .to('#hN2',   { yPercent: 0, opacity: 1, duration: 1.2 },  .8)
+    .to('#hDate', { opacity: 1, y: 0, duration: .9 },          1.4)
+    .to('#hScroll',{ opacity: 1, duration: .6 },                1.8);
   if (document.getElementById('heroBg')) {
-    gsap.to('#heroBg', { yPercent: 22, ease: 'none',
+    gsap.to('#heroBg', { yPercent: 15, ease: 'none',
       scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
   }
 }
@@ -1380,30 +1388,114 @@ function initGallery() {
   })();
 }
 
-/* ── SCROLL ANIMATIONS ───────────────────────────────── */
+/* ── SCROLL ANIMATIONS — rich per-element ────────────── */
 function scrollAnims() {
   ScrollTrigger.refresh();
-  const ease = 'power3.out';
-  document.querySelectorAll('section').forEach(sec => {
-    const els = sec.querySelectorAll('.lbl,.ttl,.gline');
-    if (els.length) gsap.from(els, { opacity:0, y:22, duration:.7, stagger:.1, ease, scrollTrigger:{ trigger:sec, start:'top 88%', once:true } });
+  const e1 = 'power3.out', e2 = 'back.out(1.4)', e3 = 'elastic.out(1,.5)';
+
+  /* ── generic section headers: lbl, ttl, gline ──────── */
+  document.querySelectorAll('section, footer').forEach(sec => {
+    const lbls = sec.querySelectorAll('.lbl');
+    const ttls = sec.querySelectorAll('.ttl');
+    const gls  = sec.querySelectorAll('.gline');
+    if (lbls.length) gsap.from(lbls, { opacity:0, y:14, letterSpacing:'0px', duration:.8, stagger:.08, ease:e1, scrollTrigger:{ trigger:sec, start:'top 88%', once:true } });
+    if (ttls.length) gsap.from(ttls, { opacity:0, y:28, scale:.92, duration:1, stagger:.1, ease:e2, scrollTrigger:{ trigger:sec, start:'top 86%', once:true } });
+    if (gls.length)  gsap.from(gls,  { scaleX:0, duration:1.2, ease:e1, scrollTrigger:{ trigger:sec, start:'top 85%', once:true } });
   });
+
+  /* ── versículo ─────────────────────────────────────── */
+  gsap.from('.vers-text', { opacity:0, y:30, duration:1.2, ease:e1, scrollTrigger:{ trigger:'#versiculo', start:'top 82%', once:true } });
+  gsap.from('.vers-ref',  { opacity:0, y:16, duration:.8, delay:.3, ease:e1, scrollTrigger:{ trigger:'#versiculo', start:'top 82%', once:true } });
+  gsap.from('#versiculo .ornament-h', { opacity:0, scaleX:0, duration:1, ease:e1, scrollTrigger:{ trigger:'#versiculo', start:'top 88%', once:true } });
+
+  /* ── countdown ─────────────────────────────────────── */
+  gsap.from('.cd-grid', { opacity:0, y:40, duration:1, ease:e2, scrollTrigger:{ trigger:'#countdown', start:'top 80%', once:true } });
+  gsap.from('.cd-col', { opacity:0, y:30, scale:.85, duration:.8, stagger:.12, ease:e3, scrollTrigger:{ trigger:'.cd-grid', start:'top 85%', once:true } });
+
+  /* ── location cards ────────────────────────────────── */
   ScrollTrigger.create({
     trigger:'#location', start:'top 78%', once:true,
     onEnter() {
-      gsap.from('.loc-card', { opacity:0, y:36, duration:.75, stagger:.14, ease });
-      document.querySelectorAll('.loc-card').forEach((c,i) => setTimeout(() => c.classList.add('on'), 420+i*220));
+      gsap.from('.loc-card', { opacity:0, y:50, rotateX:8, duration:1, stagger:.2, ease:e1 });
+      document.querySelectorAll('.loc-card').forEach((c,i) => setTimeout(() => c.classList.add('on'), 500+i*250));
     }
   });
-  gsap.from(['#calendar .cal-sub','#calBtn'], { opacity:0, y:18, scale:.96, duration:.65, stagger:.14, ease:'back.out(1.3)', scrollTrigger:{ trigger:'#calendar', start:'top 84%', once:true } });
-  gsap.from('.dc-main-style', { opacity:0, y:18, duration:.8, ease, scrollTrigger:{ trigger:'#dresscode', start:'top 84%', once:true } });
-  gsap.from(['.dc-cols','.dc-swatches','.dc-note'], { opacity:0, y:22, duration:.6, stagger:.12, ease, scrollTrigger:{ trigger:'#dresscode', start:'top 80%', once:true } });
-  gsap.from(['.fam-ttl','.fam-card'], { opacity:0, y:20, duration:.6, stagger:.1, ease, scrollTrigger:{ trigger:'#family', start:'top 78%', once:true } });
-  gsap.from(['.kp-icon','.kp-body'], { opacity:0, y:22, duration:.65, stagger:.12, ease, scrollTrigger:{ trigger:'#kids-policy', start:'top 84%', once:true } });
-  gsap.from(['.qr-img','.qr-hint'], { opacity:0, y:22, scale:.96, duration:.65, stagger:.12, ease:'back.out(1.3)', scrollTrigger:{ trigger:'#qr-album', start:'top 84%', once:true } });
-  gsap.from('.gf-card', { opacity:0, y:22, duration:.6, stagger:.11, ease, scrollTrigger:{ trigger:'#gifts', start:'top 80%', once:true } });
-  gsap.from(['#rsvp .rsvp-sub','.rsvp-msg-quote','.rsvp-btn-wrap'], { opacity:0, y:18, duration:.55, stagger:.1, ease, scrollTrigger:{ trigger:'#rsvp', start:'top 80%', once:true } });
-  gsap.from('#footer > *', { opacity:0, y:20, duration:.6, stagger:.1, ease, scrollTrigger:{ trigger:'#footer', start:'top 90%', once:true } });
+  document.querySelectorAll('.loc-venue-img').forEach(img => {
+    gsap.from(img, { opacity:0, scale:.88, duration:1, ease:e2, scrollTrigger:{ trigger:img, start:'top 85%', once:true } });
+  });
+  document.querySelectorAll('.loc-medallion').forEach(med => {
+    gsap.from(med, { opacity:0, scale:.6, rotation:-15, duration:1.2, ease:e3, scrollTrigger:{ trigger:med, start:'top 85%', once:true } });
+  });
+  document.querySelectorAll('.loc-addr').forEach(a => {
+    gsap.from(a, { opacity:0, y:18, duration:.8, ease:e1, scrollTrigger:{ trigger:a, start:'top 90%', once:true } });
+  });
+  document.querySelectorAll('.loc-map').forEach(m => {
+    gsap.from(m, { opacity:0, y:24, scale:.94, duration:1, ease:e2, scrollTrigger:{ trigger:m, start:'top 88%', once:true } });
+  });
+  document.querySelectorAll('.loc-card .btn').forEach(b => {
+    gsap.from(b, { opacity:0, y:16, scale:.9, duration:.8, ease:e2, scrollTrigger:{ trigger:b, start:'top 92%', once:true } });
+  });
+
+  /* ── calendar ──────────────────────────────────────── */
+  gsap.from('.cal-sub', { opacity:0, y:22, duration:.9, ease:e1, scrollTrigger:{ trigger:'#calendar', start:'top 82%', once:true } });
+  gsap.from('#calBtn', { opacity:0, y:18, scale:.9, duration:.8, ease:e2, scrollTrigger:{ trigger:'#calendar', start:'top 78%', once:true } });
+
+  /* ── dresscode ─────────────────────────────────────── */
+  gsap.from('.dc-main-style', { opacity:0, scale:.8, duration:1.2, ease:e3, scrollTrigger:{ trigger:'#dresscode', start:'top 82%', once:true } });
+  gsap.from('.dc-cols', { opacity:0, y:40, duration:1, ease:e1, scrollTrigger:{ trigger:'#dresscode', start:'top 78%', once:true } });
+  gsap.from('.dc-col', { opacity:0, y:30, scale:.9, duration:.8, stagger:.15, ease:e2, scrollTrigger:{ trigger:'.dc-cols', start:'top 85%', once:true } });
+  gsap.from('.dc-swatch', { opacity:0, scale:0, duration:.6, stagger:.06, ease:e3, scrollTrigger:{ trigger:'.dc-swatches', start:'top 90%', once:true } });
+  gsap.from('.dc-note', { opacity:0, x:-30, duration:.9, ease:e1, scrollTrigger:{ trigger:'.dc-note', start:'top 90%', once:true } });
+
+  /* ── family ────────────────────────────────────────── */
+  document.querySelectorAll('.fam-ttl').forEach(t => {
+    gsap.from(t, { opacity:0, y:16, duration:.7, ease:e1, scrollTrigger:{ trigger:t, start:'top 90%', once:true } });
+  });
+  document.querySelectorAll('.fam-card').forEach((c,i) => {
+    gsap.from(c, { opacity:0, x: i%2===0 ? -40 : 40, rotateY: i%2===0 ? -5 : 5, duration:1, ease:e1, scrollTrigger:{ trigger:c, start:'top 88%', once:true } });
+  });
+
+  /* ── gallery ───────────────────────────────────────── */
+  gsap.from('.gallery-sub', { opacity:0, y:18, duration:.9, ease:e1, scrollTrigger:{ trigger:'#gallery', start:'top 82%', once:true } });
+  document.querySelectorAll('.wheel-card').forEach((c,i) => {
+    gsap.from(c, { opacity:0, y:40, scale:.85, rotation: (i%2===0?-3:3), duration:.9, delay:i*.08, ease:e2, scrollTrigger:{ trigger:'.wheel-ring', start:'top 85%', once:true } });
+  });
+  gsap.from('.gal-hint', { opacity:0, y:12, duration:.7, ease:e1, scrollTrigger:{ trigger:'.gal-hint', start:'top 94%', once:true } });
+
+  /* ── QR album ──────────────────────────────────────── */
+  gsap.from('.qr-img', { opacity:0, scale:.7, rotation:-8, duration:1.2, ease:e3, scrollTrigger:{ trigger:'#qr-album', start:'top 82%', once:true } });
+  gsap.from('.qr-hint', { opacity:0, y:22, duration:.8, ease:e1, scrollTrigger:{ trigger:'#qr-album', start:'top 80%', once:true } });
+
+  /* ── gifts ─────────────────────────────────────────── */
+  gsap.from('.gf-sub', { opacity:0, y:18, duration:.8, ease:e1, scrollTrigger:{ trigger:'#gifts', start:'top 84%', once:true } });
+  document.querySelectorAll('.gf-card').forEach((c,i) => {
+    gsap.from(c, { opacity:0, y:36, scale:.92, duration:.9, delay:i*.12, ease:e2, scrollTrigger:{ trigger:'#gifts', start:'top 80%', once:true } });
+  });
+
+  /* ── RSVP ──────────────────────────────────────────── */
+  gsap.from('#rsvp .ornament-h', { opacity:0, scaleX:0, duration:1, ease:e1, scrollTrigger:{ trigger:'#rsvp', start:'top 86%', once:true } });
+  gsap.from('.rsvp-sub', { opacity:0, y:22, duration:.9, ease:e1, scrollTrigger:{ trigger:'#rsvp', start:'top 82%', once:true } });
+  gsap.from('.rsvp-msg-quote', { opacity:0, y:26, duration:1, ease:e1, scrollTrigger:{ trigger:'#rsvp', start:'top 78%', once:true } });
+  gsap.from('.rsvp-btn-wrap', { opacity:0, y:20, scale:.9, duration:.8, ease:e2, scrollTrigger:{ trigger:'#rsvp', start:'top 76%', once:true } });
+
+  /* ── footer ────────────────────────────────────────── */
+  gsap.from('.ft-orn', { opacity:0, scaleX:0, duration:.8, ease:e1, scrollTrigger:{ trigger:'#footer', start:'top 90%', once:true } });
+  gsap.from('.ft-nms', { opacity:0, scale:.8, y:30, duration:1.2, ease:e2, scrollTrigger:{ trigger:'#footer', start:'top 88%', once:true } });
+  gsap.from('.ft-dt', { opacity:0, y:16, duration:.8, ease:e1, scrollTrigger:{ trigger:'#footer', start:'top 86%', once:true } });
+  gsap.from('.ft-note', { opacity:0, y:22, duration:1, ease:e1, scrollTrigger:{ trigger:'#footer', start:'top 84%', once:true } });
+  gsap.from('.el-credit', { opacity:0, y:14, duration:.7, ease:e1, scrollTrigger:{ trigger:'#footer', start:'top 80%', once:true } });
+
+  /* ── parallax on section backgrounds ───────────────── */
+  document.querySelectorAll('.sec-floral').forEach(fl => {
+    gsap.fromTo(fl, { yPercent:-8 }, { yPercent:8, ease:'none',
+      scrollTrigger:{ trigger:fl.parentElement, start:'top bottom', end:'bottom top', scrub:true } });
+  });
+
+  /* ── buttons subtle pulse on scroll ────────────────── */
+  document.querySelectorAll('.btn').forEach(btn => {
+    gsap.from(btn, { opacity:0, y:16, scale:.92, duration:.8, ease:e2, scrollTrigger:{ trigger:btn, start:'top 92%', once:true } });
+  });
+
   initItinerary();
   initGallery();
 }
