@@ -1117,41 +1117,19 @@ function unlockAudio() {
   } catch(e) {}
 }
 
-function playMusicSilent() {
+function playMusicNow() {
   const bgm = document.getElementById('bgMusic');
+  const btn = document.getElementById('music-btn');
   if (!bgm) return;
   unlockAudio();
-  bgm.volume = 0;
+  if (_audioCtx && _audioCtx.state === 'suspended') _audioCtx.resume();
+  bgm.volume = 1;
   bgm.muted = false;
   const p = bgm.play();
   if (p) p.catch(() => {
     bgm.load();
-    setTimeout(() => { bgm.volume = 0; bgm.play().catch(()=>{}); }, 100);
+    setTimeout(() => { bgm.volume = 1; bgm.play().catch(()=>{}); }, 100);
   });
-}
-
-function fadeInMusic() {
-  const bgm = document.getElementById('bgMusic');
-  const btn = document.getElementById('music-btn');
-  if (!bgm) return;
-  if (_audioCtx && _audioCtx.state === 'suspended') _audioCtx.resume();
-  if (bgm.paused) {
-    bgm.volume = 0;
-    bgm.muted = false;
-    const p = bgm.play();
-    if (p) p.catch(() => {
-      bgm.load();
-      bgm.play().catch(()=>{});
-    });
-  }
-  let vol = bgm.volume;
-  const target = 1;
-  const step = 0.05;
-  const iv = setInterval(() => {
-    vol = Math.min(vol + step, target);
-    bgm.volume = vol;
-    if (vol >= target) clearInterval(iv);
-  }, 40);
   if (btn) btn.classList.add('is-playing');
   document.addEventListener('visibilitychange', function resumeOnVisible() {
     if (!document.hidden && bgm.paused) {
@@ -1167,7 +1145,7 @@ function openEnvelope() {
   if (envelopeOpened) return;
   envelopeOpened = true;
 
-  playMusicSilent();
+  playMusicNow();
 
   const content = document.querySelector('.ld-content');
   const overlay = document.querySelector('.ld-overlay');
@@ -1205,7 +1183,7 @@ function toggleMusic() {
 function dismissLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
-  fadeInMusic();
+  playMusicNow();
   gsap.to(loader, {
     opacity: 0, duration: .6, ease: 'power2.out',
     onComplete() {
