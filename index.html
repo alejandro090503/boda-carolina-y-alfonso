@@ -548,7 +548,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 <div id="toast"></div>
 
 <!-- AUDIO — Supabase, nunca en /public -->
-<audio id="bgMusic" loop preload="metadata">
+<audio id="bgMusic" loop preload="auto" playsinline>
   <source src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/audio/boda-carolina-y-alfonso/cancion.mp3" type="audio/mpeg">
 </audio>
 
@@ -1095,25 +1095,70 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btn) btn.addEventListener('click', toggleMusic);
   countdown();
   setInterval(countdown, 1000);
-  startMusicOnFirstGesture();
 });
 
-/* ── AUTO MUSIC — primer toque/click arranca la música ── */
-function startMusicOnFirstGesture() {
-  let started = false;
-  function tryPlay() {
-    if (started) return;
-    const bgm = document.getElementById('bgMusic');
-    if (!bgm) return;
-    started = true;
-    bgm.volume = 1;
-    bgm.play().then(() => {
-      const btn = document.getElementById('music-btn');
-      if (btn) btn.classList.add('is-playing');
-    }).catch(() => { started = false; });
-    ['click','touchstart','scroll','keydown'].forEach(e => document.removeEventListener(e, tryPlay, {capture:true}));
+/* ── AUDIO ENGINE — autoplay robusto multi-navegador ── */
+let _audioUnlocked = false;
+let _audioCtx = null;
+
+function unlockAudio() {
+  if (_audioUnlocked) return;
+  _audioUnlocked = true;
+  try {
+    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_audioCtx.state === 'suspended') _audioCtx.resume();
+    const osc = _audioCtx.createOscillator();
+    const gain = _audioCtx.createGain();
+    gain.gain.value = 0;
+    osc.connect(gain);
+    gain.connect(_audioCtx.destination);
+    osc.start(0);
+    osc.stop(_audioCtx.currentTime + 0.001);
+  } catch(e) {}
+}
+
+function playMusicSilent() {
+  const bgm = document.getElementById('bgMusic');
+  if (!bgm) return;
+  unlockAudio();
+  bgm.volume = 0;
+  bgm.muted = false;
+  const p = bgm.play();
+  if (p) p.catch(() => {
+    bgm.load();
+    setTimeout(() => { bgm.volume = 0; bgm.play().catch(()=>{}); }, 100);
+  });
+}
+
+function fadeInMusic() {
+  const bgm = document.getElementById('bgMusic');
+  const btn = document.getElementById('music-btn');
+  if (!bgm) return;
+  if (_audioCtx && _audioCtx.state === 'suspended') _audioCtx.resume();
+  if (bgm.paused) {
+    bgm.volume = 0;
+    bgm.muted = false;
+    const p = bgm.play();
+    if (p) p.catch(() => {
+      bgm.load();
+      bgm.play().catch(()=>{});
+    });
   }
-  ['click','touchstart','scroll','keydown'].forEach(e => document.addEventListener(e, tryPlay, {capture:true, passive:true}));
+  let vol = bgm.volume;
+  const target = 1;
+  const step = 0.05;
+  const iv = setInterval(() => {
+    vol = Math.min(vol + step, target);
+    bgm.volume = vol;
+    if (vol >= target) clearInterval(iv);
+  }, 40);
+  if (btn) btn.classList.add('is-playing');
+  document.addEventListener('visibilitychange', function resumeOnVisible() {
+    if (!document.hidden && bgm.paused) {
+      bgm.play().catch(()=>{});
+      if (btn) btn.classList.add('is-playing');
+    }
+  });
 }
 
 /* ── ENVELOPE OPEN ───────────────────────────────────── */
@@ -1122,13 +1167,7 @@ function openEnvelope() {
   if (envelopeOpened) return;
   envelopeOpened = true;
 
-  /* Arrancar música silenciosa en el gesto de click ──── */
-  /* (volumen 0 durante el video; dismissLoader sube a 1) */
-  const bgm = document.getElementById('bgMusic');
-  if (bgm) {
-    bgm.volume = 0;
-    bgm.play().catch(() => {});   // sin pause → evita race con dismissLoader
-  }
+  playMusicSilent();
 
   const content = document.querySelector('.ld-content');
   const overlay = document.querySelector('.ld-overlay');
@@ -1166,15 +1205,7 @@ function toggleMusic() {
 function dismissLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
-  const bgm = document.getElementById('bgMusic');
-  if (bgm) {
-    bgm.volume = 1;               // sube volumen (ya estaba playing en silencio)
-    if (bgm.paused) {             // fallback: si por alguna razón estaba pausado
-      bgm.play().catch(() => {});
-    }
-    const btn = document.getElementById('music-btn');
-    if (btn) btn.classList.add('is-playing');
-  }
+  fadeInMusic();
   gsap.to(loader, {
     opacity: 0, duration: .6, ease: 'power2.out',
     onComplete() {
